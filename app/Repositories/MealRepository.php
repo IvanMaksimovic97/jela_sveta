@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Interfaces\MealRepositoryInterface;
+use App\Language;
 use App\Meal;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
@@ -10,11 +11,12 @@ use stdClass;
 
 class MealRepository implements MealRepositoryInterface
 {
-    private $mealModel, $dataResult, $lang, $per_page, $page, $category, $tags, $with, $diff_time;
+    private $mealModel, $dataResult, $lang, $per_page, $page, $category, $tags, $with, $diff_time, $langs;
 
     public function __construct(Meal $mealModel)
     {
         $this->mealModel = $mealModel;
+        $this->langs = Language::all()->pluck('locale')->toArray();
     }
 
     private function setFilters($lang, $per_page, $page, $category, $tags, $with, $diff_time)
@@ -32,11 +34,9 @@ class MealRepository implements MealRepositoryInterface
     {
         $this->setFilters($lang, $per_page, $page, $category, $tags, $with, $diff_time);
 
-        $langs = ['en', 'fr'];
-
         App::setlocale('en');
 
-        if (in_array($lang, $langs)) {
+        if (in_array($lang, $this->langs)) {
             App::setlocale($lang);
         }
         
