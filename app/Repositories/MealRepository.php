@@ -64,7 +64,7 @@ class MealRepository implements MealRepositoryInterface
             });
         }
 
-        $this->dataResult = $query->paginate($per_page);
+        $this->dataResult = $query->paginate($per_page)->appends(request()->query());
         return $this->dataResult;
     }
 

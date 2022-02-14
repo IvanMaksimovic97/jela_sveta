@@ -1,3 +1,15 @@
+## Instalacija projekta
+
+- Otvoriti terminal i izvrsiti komandu "git clone https://github.com/IvanMaksimovic97/jela_sveta.git" ili preuzeti ZIP.
+- Otvoriti novi terminal u root-u projekta.
+- Izvrsiti komandu "composer install"
+- Podesiti parametre za bazu u .env fajlu
+- Izvrsiti komandu "php artisan key:generate"
+- Izvrsiti komandu "php artisan migrate:fresh --seed"
+- Pokrenuti projekat "php artisan serve"
+- Otvoriti browser, ici na http://127.0.0.1:8000
+- Ruta za API je http://127.0.0.1:8000/api/meals?lang=en
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
