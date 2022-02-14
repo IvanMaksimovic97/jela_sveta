@@ -21,7 +21,7 @@ class MealTagSeeder extends Seeder
         DB::transaction(function () use ($meals, $tags) {
             foreach ($meals as $meal) {
                 $numberOfIngredients = rand(0, 5);
-                for ($i = 0; $i < $numberOfIngredients; $i++) {
+                for ($i = 0; $i <= $numberOfIngredients; $i++) {
                     $mealTag = new MealTag();
                     $mealTag->meal_id = $meal->id;
                     $mealTag->tag_id = $tags->random();
