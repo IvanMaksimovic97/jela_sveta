@@ -16,6 +16,10 @@ class LanguageSeeder extends Seeder
         $languages = [
             ['name' => 'English', 'locale' => 'en', 'created_at' => Carbon::now()],
             ['name' => 'French', 'locale' => 'fr', 'created_at' => Carbon::now()],
+            ['name' => 'Croatian', 'locale' => 'hr', 'created_at' => Carbon::now()],
+            ['name' => 'Russian', 'locale' => 'ru', 'created_at' => Carbon::now()],
+            ['name' => 'Italian', 'locale' => 'it', 'created_at' => Carbon::now()],
+            ['name' => 'Spanish', 'locale' => 'es', 'created_at' => Carbon::now()],
         ];
 
         Language::insert($languages);

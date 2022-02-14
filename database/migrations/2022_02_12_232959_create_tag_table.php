@@ -23,14 +23,12 @@ class CreateTagTable extends Migration
         Schema::create('tag_translations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('tag_id')->index();
-            $table->unsignedBigInteger('language_id')->index()->nullable()->default(null);
             $table->string('title');
             $table->string('locale')->index();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('tag_id')->references('id')->on('tag')->onDelete('cascade');
-            $table->foreign('language_id')->references('id')->on('language')->onDelete('cascade');
         });
     }
 

@@ -25,7 +25,6 @@ class CreateMealTable extends Migration
         Schema::create('meal_translations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('meal_id')->index();
-            $table->unsignedBigInteger('language_id')->index()->nullable()->default(null);
             $table->string('title');
             $table->string('description');
             $table->string('locale')->index();
@@ -33,7 +32,6 @@ class CreateMealTable extends Migration
             $table->softDeletes();
 
             $table->foreign('meal_id')->references('id')->on('meal')->onDelete('cascade');
-            $table->foreign('language_id')->references('id')->on('language')->onDelete('cascade');
         });
     }
 

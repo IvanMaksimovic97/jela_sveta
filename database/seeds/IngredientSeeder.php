@@ -1,6 +1,9 @@
 <?php
 
+use App\Faker\IngredientProvider;
 use App\Ingredient;
+use App\Language;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -13,36 +16,24 @@ class IngredientSeeder extends Seeder
      */
     public function run()
     {
-        $ingredientsEn = [
-            'Butter',
-            'Egg',
-            'Cheese',
-            'Sour cream',
-            'Mozzarella',
-            'Yogurt',
-            'Cream',
-            'Milk'
-        ];
-    
-        $ingredientsFr = [
-            'Beurre',
-            'Oeuf',
-            'Fromage',
-            'Crème aigre',
-            'Mozzarella',
-            'Yaourt',
-            'Crème',
-            'Lait',
-        ];
+        $languages = Language::all()->pluck('locale')->toArray();
 
-        DB::transaction(function() use ($ingredientsEn, $ingredientsFr) {
-            for ($i=0; $i < count($ingredientsEn); $i++) {
+        $faker = Factory::create();
+        $faker->addProvider(new IngredientProvider($faker));
+
+        DB::transaction(function() use ($languages, $faker) {
+            for ($i=0; $i < 5; $i++) {
+                $randomIngredient = $faker->ingredientNameWithTranslations($languages);
                 $ingredient = new Ingredient();
-                $ingredient->slug = $ingredientsEn[$i];
-                $ingredient->fill([
-                    'title:en' => $ingredientsEn[$i],
-                    'title:fr' => $ingredientsFr[$i]
-                ]);
+                $ingredient->slug = 'ingredient-'.$i;
+
+                $data = [];
+
+                foreach ($languages as $lang) {
+                    $data['title:'.$lang] = $randomIngredient[$lang];
+                }
+
+                $ingredient->fill($data);
                 $ingredient->save();
             }
         });

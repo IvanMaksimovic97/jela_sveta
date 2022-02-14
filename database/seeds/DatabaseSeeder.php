@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        ini_set('memory_limit', '-1'); // Ukoliko je računar sporiji da ne pukne
         $this->call(LanguageSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(TagSeeder::class);

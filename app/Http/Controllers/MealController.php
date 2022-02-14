@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Faker\IngredientProvider;
+use App\Faker\MealProvider;
 use App\Http\Requests\GetMealsRequest;
 use App\Interfaces\MealRepositoryInterface;
+use Faker\Factory;
 use Illuminate\Http\Request;
 
 class MealController extends Controller
@@ -22,7 +25,6 @@ class MealController extends Controller
      */
     public function index(GetMealsRequest $request)
     {
-        //dd($request->tags);
         $meals = $this->mealRepository->getMeals(
             $request->lang, 
             $request->per_page, 
